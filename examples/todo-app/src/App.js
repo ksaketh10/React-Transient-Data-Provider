@@ -1,14 +1,15 @@
 import React from 'react';
 import './App.css';
 import CreateTodo from './CreateTodo';
-import TodosList from './TodoList';
+import TodoItem from './TodoItem';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+      
         <CreateTodo />
-        <TodosList />
+        <TodoItem />
       </header>
     </div>
   );
