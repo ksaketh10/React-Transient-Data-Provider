@@ -2,45 +2,52 @@ This is a light weight data transfer library between components in react. It wor
 
 In your project directory, you can install npm:
 
-### `npm i react-transient-provider`
+### `npm i react-transient-data-provider`
 
 Usage
 
-Here is a simple todo app example on how to use useSaveKey and useObserveOnKey react hooks to tranfer dataa between components
+Here is a simple todo app example on how to use useSaveKey and useObserveOnKey react hooks to tranfer data between components
 
 First save the data you want to save with useSaveKey hook like below;
 
-### `
-###const CreateTodo = () => {
-### const saveKey = useSaveKey();
-### const [state, setState] = React.useState({ 'task': '' });
+```
+import React from "react";
+import { useSaveKey } from "react-transient-data-provider";
 
-### const handleTaskChange = (e) => {
-###     setState({ task: e.target.value });
-### };
+const CreateTodo = () => {
+    const saveKey = useSaveKey();
+    const [state, setState] = React.useState({ 'task': '' });
 
-### const onSubmit = (e) => {
-###     e.preventDefault();
-###     saveKey("todo", state.task);
-###}
-###return (
-### <form onSubmit={onSubmit}>
-### <input type="text" onChange={handleTaskChange} placeholder="Task" autoFocus />
-### <button>Add</button>
-###</form>
-###)
-###}`
+    const handleTaskChange = (e) => {
+        setState({ task: e.target.value });
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        saveKey("todo", state.task);
+    }
+    return (
+        <form onSubmit={onSubmit}>
+            <input type="text" onChange={handleTaskChange} placeholder="Task" autoFocus />
+            <button>Add</button>
+        </form>
+    )
+}
+```
 
 And retrieve the key value in other component using useObserveOnKey hook
+```
+import React from "react";
+import { useObserveOnKey } from "react-transient-data-provider";
 
-###`
-###const TodosItem = () => {
-###    const todo = useObserveOnKey("todo");
-###    return (
-###        <React.Fragment>
-###            {todo}
-###        </React.Fragment>
-###    )
-###}
-`
+const TodosItem = () => {
+    const todo = useObserveOnKey("todo");
+
+    return (
+        <React.Fragment>
+            {todo}
+        </React.Fragment>
+    )
+}
+```
 
